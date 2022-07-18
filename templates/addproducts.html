@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+  <!-- client section -->
+
+  {% block title %}Listing Your Product{% endblock title %}
+
+{% block search %}{% endblock search %}
+
+{% block body %}
+  <h1 style='text-align:center'> ADD YOUR PRODUCT </h1>
+  <div style='text-align:center'>
+    <form method="post" enctype="multipart/form-data" >
+      {% csrf_token %}
+    {{form.as_p}}
+  <button type="submit">ADD THE PRODUCT</button><br><br>
+  </div>
+</form>
+{% endblock body %}

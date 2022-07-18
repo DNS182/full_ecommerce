@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Let's CheckOut{% endblock title %}
+
+{% block search %}{% endblock search %}
+
+{% block body %}
+<button id="rzp-button1" style='margin:100px 200px;border-radius:10px;background-color:green;color:white' >PAY USING RAZORPAY</button>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+var options = {
+    "key": "{{razorpay_merchant_id}}" , // Enter the Key ID generated from the Dashboard
+    "amount": "{% widthratio final_price 1 100 %}",  // amount is 1 * 100 cause razorpay use paisa
+    "currency": "INR",
+    "name": "OnEighTwo",
+    "description": "Due Payment",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSI21P6Q7WuTT_rTRdUKTEeJFZhRuBsxLZWgQ&usqp=CAU",
+    "order_id": "{{order_id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    "callback_url": "{% url 'handler' %}", //to handle request coming from Razorpay
+    "prefill": {
+        "name": "{{request.user.username}}",
+        "email": "{{request.user.email}}",
+        "contact": "+91" + "{{adres.phone_no}}"
+    },
+    "notes": {
+        "address": "Razorpay Corporate Office"
+    },
+    "theme": {
+        "color": "#3399cc"
+    }
+};
+var rzp1 = new Razorpay(options);
+document.getElementById('rzp-button1').onclick = function(e){
+    rzp1.open();
+    e.preventDefault();
+}
+</script>
+{% endblock body %}
+

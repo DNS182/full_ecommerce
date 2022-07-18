@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+
+<div style='text-align:center;margin-top:70px'>
+<form method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+<a href="{% url 'home' %}"> <button style= 'background-color:red;border-radius: 20px;'>KEEP SHOPPING</button></a>
+<a href="{% url 'checkout' %}"> <button type = 'submit' style= 'background-color:green;border-radius: 20px;'> PROCEED TO PAYOUT </button> </a>
+
+</form>
+</div>
+
+
+{% endblock body %}
+
+{% block footer %}
+{% endblock footer %}

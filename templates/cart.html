@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Shopping Cart{% endblock title %}
+
+{% block css %}
+
+<link href="{% static 'css/table.css' %}" rel="stylesheet" />
+
+{% endblock css %}
+
+{% block search %}{% endblock search %}
+
+{% block body %}
+
+ <div class="container">
+    <h1>Your Cart</h1>
+      <table class="rwd-table">
+        <tbody>
+          <tr>
+            <th>S.No</th>
+            <th>Product Name</th>
+            <th>Product Price</th>
+            <th>Product Quantity</th>
+            <th>Net Amount</th>
+          </tr>
+          {% for a in order.items.all  %}
+          <tr>
+            <td data-th="S.No">
+              {{forloop.counter}}
+            </td>
+            <td data-th="Product Name">
+              {{a.product.name}}
+            </td>
+            <td data-th="Product Price">
+              Rs. {{a.product.price}}
+            </td>
+            <td data-th="Product Quantity">
+              <a href="{% url 'cart-add' a.product.pk %}">&nbsp; + &nbsp;</a>
+              {{a.quantity}}
+              <a href="{% url 'cart-minus' a.product.pk %}">&nbsp; -</a>
+            </td>
+            <td data-th="Net Amount">
+              Rs. {{ a.total_item_price }}
+            </td>
+          </tr>
+          {% empty %}
+          <td data-th="Product Quantity">
+            NOTHING TO SHOW UP 
+          </td>
+          {% endfor %}
+
+          {% if order.get_total_price %}
+          <tr>
+            <td data-th="">
+            </td>
+            <td data-th="">
+              <b>FINAL PRICE</b>
+            </td>
+            <td data-th="">
+            </td>
+            <td data-th="">
+            </td>
+            <td data-th="Net Amount">
+            Rs. {{ order.get_total_price }}
+            </td>
+          </tr>
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="keep" > 
+   <a href="{% url 'home' %}"> <button style= 'background-color:red;border-radius: 20px;margin-left:500px;margin-top:30px;margin-bottom:20px' >KEEP SHOPPING</button></a>
+   <a href="{% url 'address' %}"> <button style= 'background-color:green;border-radius: 20px;'> PROCEED TO CHECKOUT </button> </a>
+    </div>
+
+{% endblock body %}
+
+{% block footer %}
+{% endblock footer %}

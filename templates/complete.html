@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}One Step Closer{% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/invoice.css' %}" />
+{% endblock css %}
+
+{% block search %}{% endblock search %}
+
+
+{% block body %}
+<div class="container">
+    <div class="row">
+                        <!-- BEGIN INVOICE -->
+                        <div class="col-xs-12">
+                            <div class="grid invoice">
+                                <div class="grid-body">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <h2>INVOICE<br>
+                                                <span class="small">DATE : &nbsp; {{order.datetime_of_payment}}</span></h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <address>
+                                                <strong>Shipping INFO</strong><br>
+                                                Username :&nbsp; {{request.user.username}}<br>
+                                                Country :&nbsp; {{ad.country}}<br>
+                                                City :&nbsp; {{ad.city}}<br>
+                                                Street Address : &nbsp;{{ad.street_address}}<br>
+                                                Zip-Code : &nbsp;{{ad.zip_code}}<br>
+                                                Phone : &nbsp;{{ad.phone_no}}
+                                            </address>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <address>
+                                                <strong>Payment Id: &nbsp;</strong>{{pay.id}}<br>
+                                                <strong>Payment Email:&nbsp;</strong>{{pay.email}}<br>
+                                            </address>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h3>ORDER SUMMARY</h3>
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr class="line">
+                                                        <td><strong>#</strong></td>
+                                                        <td class="text-center"><strong>ITEMS</strong></td>
+                                                        <td class="text-center"><strong>PCS</strong></td>
+                                                        <td class="text-right"><strong>RATE</strong></td>
+                                                        <td class="text-right"><strong>SUBTOTAL</strong></td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for x in  order.items.all %}
+                                                    <tr>
+                                                        <td>{{forloop.counter}}</td>
+                                                        <td><strong>{{x.product.name}}</strong><br>{{x.product.desc}}</td>
+                                                        <td class="text-center">{{x.quantity}}</td>
+                                                        <td class="text-center">{{x.product.price}}</td>
+                                                        <td class="text-right">{{x.total_item_price}}</td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                    <tr>
+                                                        <td colspan="3"></td>
+                                                        <td class="text-right"><strong>CHARGE FEE</strong></td>
+                                                        <td class="text-right"><strong>N/A</strong></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="3">
+                                                        </td><td class="text-right"><strong>Total</strong></td>
+                                                        <td class="text-right"><strong>{{order.get_total_price}}</strong></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>									
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 text-right identity">
+                                            <p>THANK YOU FOR SHOPPING<br><strong>OnEighTwo</strong></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END INVOICE -->
+                    </div>
+    </div>
+{% endblock body %}
+
+
+
+
+
+
+
+{% block footer %}{% endblock footer %}
+
+
+
+
+
+
+
