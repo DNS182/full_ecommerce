@@ -16,6 +16,10 @@ TO LAUNCH THE WEB-APP
       python manage.py createsuperuser
       
       python manage.py migrate --run-syncdb # creates the rest of the database if not
+      
+
+Note :
+      for test payment use Mobile Wallet like mobikwik/freecharge as other may won't work..
             
 
 
