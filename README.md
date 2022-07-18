@@ -10,8 +10,11 @@ TO LAUNCH THE WEB-APP
 
 2nd - Clone the git repo and simply hit following commands :
       python manage.py makemigrations
+      
       python manage.py migrate
+      
       python manage.py createsuperuser
+      
       python manage.py migrate --run-syncdb # creates the rest of the database if not
             
 
