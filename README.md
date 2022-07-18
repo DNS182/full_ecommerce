@@ -6,6 +6,8 @@ Web-app with features that makes it an complete ecommerce website.
 TO LAUNCH THE WEB-APP
 
 1st - Get api keys and secret keys from razorpay api.
+
+
 2nd - Clone the git repo and simply hit following commands :
       python manage.py makemigrations
       python manage.py migrate
